@@ -3,19 +3,32 @@ name: Super-Linter
 on: push
 
 jobs:
-  super-lint:
-    name: Lint code base
+  sonarCloudTrigger:
+    name: Sonar CloudTrigger
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Clone Repository
         uses: actions/checkout@v2
-        
-      - name: SonarCloud Scan
+      - name: Analyze with SonarCloud
         uses: SonarSource/sonarcloud-github-action@v1.6
-
-      - name: Run Super-Linter
-        uses: github/super-linter@v3.17.0
         env:
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        
+#  super-lint:
+#    name: Lint code base
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout code
+#        uses: actions/checkout@v2
+#        
+#      - name: SonarCloud Scan
+#        uses: SonarSource/sonarcloud-github-action@v1.6
+#
+#      - name: Run Super-Linter
+#        uses: github/super-linter@v3.17.0
+#        env:
+#          DEFAULT_BRANCH: main
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
